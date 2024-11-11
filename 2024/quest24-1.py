@@ -10,13 +10,13 @@ print('part 1',pt)
 
 def getval(seq):
     pt = 0
-    for i in [0,1]:
+    for i in range(len(seq)):
         if(seq[i] == 'B'):
             pt +=1
         if(seq[i] == 'C'):
             pt +=3
         if(seq[i] == 'D'):
-            pt +=5
+            pt +=5    
     return(pt)
 
 
@@ -34,3 +34,26 @@ for i in range((int) (len(f2)/2)):
 
 
 print('part 2',pt)
+          
+f3 = open('24-1-3.txt').read()
+#f3 = 'xBxAAABCDxCC'
+pt = 0
+for i in range((int) (len(f3)/3)):
+    seq = f3[3*i] + f3[3*i+1] + f3[3*i+2]
+    print(seq)
+    xs = 0
+    b = 0
+    for x in range(3):
+        if(seq[x] == 'x'):
+            xs += 1    
+    if (xs == 0): b += 6
+    if (xs == 1): b += 2    
+    print('b',b)
+    am = getval(seq)
+    print('am',am)
+    pt += am + b #getval(seq)
+    print('pt',pt)
+
+
+print('part 3',pt)
+
