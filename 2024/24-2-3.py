@@ -52,4 +52,4 @@ for i in range(li):
       if tkn[i][j]: 
         ty += 1  
 
-print(ty)
+print('part 3 -',ty)
