@@ -2,8 +2,9 @@ f1 = open('24-3-1.txt').read().split('\n')
 f2 = open('24-3-2.txt').read().split('\n')
 # Based on my times I managed to rank on the global leaderboard
 # Rank 20 for part 1 - time 15m 35s
-# Rank 3 for part 2 - time 53 sec
+# Rank 5 for part 2 - time 53 sec
 # Rank 4 for part 3 - time 15m 46s
+# I think I just got lucky with the algorithm, I'm usually quite a bit slower than this.
 
 dr = [[0,1],[0,-1],[1,0],[-1,0]]
 
