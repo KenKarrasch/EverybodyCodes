@@ -1,9 +1,9 @@
 f1 = open('24-3-1.txt').read().split('\n')
 f2 = open('24-3-2.txt').read().split('\n')
-# Based on my times I managed to get global leaderboard
-# Rank 20 for part 1
-# Rank 5 for part 2
-# Rank 4 for part 3
+# Based on my times I managed to rank on the global leaderboard
+# Rank 20 for part 1 - time 15m 35s
+# Rank 3 for part 2 - time 53 sec
+# Rank 4 for part 3 - time 15m 46s
 
 dr = [[0,1],[0,-1],[1,0],[-1,0]]
 
