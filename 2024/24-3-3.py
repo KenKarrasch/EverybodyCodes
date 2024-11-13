@@ -1,7 +1,4 @@
 f = open('24-3-3.txt').read().split('\n')
-# Yay! for part 3 my time managed to clock in at rank no 4 on the global leaderboard! 
-# (of course the time was done post event, there is probably heaps 
-# of others who did it just as fast, may as well enjoy the glory, even if it is illusory)
 
 grd = [[0 for i in range(len(f[0])+2)]]
 dn = False
