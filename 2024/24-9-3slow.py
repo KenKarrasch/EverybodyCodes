@@ -1,5 +1,5 @@
 # Made it on the global leaderboard, rank 55.  This was my first attempt, it is slow, however, it produced a result before my fast version was complete
-# Uses Dymamic Programming (Memoisation).  
+# Uses Dymamic Programming (Memoisation). 
 
 def min_coins(coins, target):
     # Initialize a list to store the minimum number of coins needed for each amount up to target
