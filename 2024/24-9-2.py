@@ -1,4 +1,4 @@
-# Part 2 uses Dynamic Programming to quickly get a result
+# Part 2 uses Dynamic Programming to quickly get a result.  Ranked 69 on the global leaderboard
 
 def min_coins(coins, target):
     # Initialize a list to store the minimum number of coins needed for each amount up to target
