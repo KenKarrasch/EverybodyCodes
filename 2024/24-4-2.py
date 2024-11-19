@@ -7,5 +7,4 @@ dr = 0
 for i in f:
     dr += i - sm
 
-print(dr)
-
+print('part 2 -', dr)
