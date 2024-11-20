@@ -1,5 +1,7 @@
 f = open('24-12-1.txt').read().split('\n')
 
+# Surprisingly got rank 55 opn global leaderboard
+
 print(f)
 
 t = []
