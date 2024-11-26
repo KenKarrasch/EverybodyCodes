@@ -1,5 +1,7 @@
 f = open('24-16-3.txt').read().split('\n')
 
+# Takes a few minutes on the phone python app.
+# Started 13 hrs late but still managed to get 82 on the global leaderboard
 
 ltrs = len(f[2])
 for i in range(2,len(f)):
@@ -187,4 +189,4 @@ while len(DB) > 0:
             DB.append((dls[:],cn+nwn,pls+1))
 
 
-print(mx, mx)
+print(mx, mn)
