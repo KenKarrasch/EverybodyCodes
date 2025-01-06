@@ -1,4 +1,4 @@
-f = open('24-17-2.txt').read().split('\n')
+f = open('24-17-1.txt').read().split('\n')
 
 stars = []
 print(f)
