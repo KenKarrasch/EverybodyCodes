@@ -5,15 +5,6 @@ sq = f[1].split('\n')
 
 tly = 0
 
-def printslot(x,y):
-    for i in range(len(pb)):
-        strg = ''        
-        for j in range(len(pb[i])):
-            if i == y and j == x:
-                strg = strg + 'o'
-            else: strg = strg + pb[i][j]
-        print(strg)
-
 for i in range((int) ((len(pb[0])+1)/2)):
     x,y = 0,0
     dr = 0        
