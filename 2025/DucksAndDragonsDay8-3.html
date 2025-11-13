@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Python to JS Implementation</title>
+</head>
+<body>
+<h3>Paste comma-separated values (as in "day8-3in.txt"):</h3>
+<textarea id="inputData" rows="4" cols="60"></textarea><br>
+<button onclick="processData()">Process</button>
+<pre id="output"></pre>
+
+<script>
+function processData() {
+    const input = document.getElementById('inputData').value;
+    // Parse input
+    let f = input.split(',').map(y => parseInt(y.trim(), 10));
+    let l = Math.max(...f);
+    let output = '';
+    output += 'l: ' + l + '\n';
+
+    let bst = 0;
+
+    for (let s = 1; s < l; s++) {
+        output += `s: ${s}\n`;
+        for (let e = s + 1; e < l; e++) {
+            let tly = 0;
+
+            for (let j = 0; j < f.length - 1; j++) {
+                let a = Math.min(s, e);
+                let b = Math.max(s, e);
+                let c = Math.min(f[j], f[j + 1]);
+                let d = Math.max(f[j], f[j + 1]);
+
+                if (a === c && b === d) {
+                    tly += 1;
+                }
+
+                let offset = Math.min(a, b);
+                a -= offset; b -= offset; c -= offset; d -= offset;
+                c = (c + 2 * l) % l;
+                d = (d + 2 * l) % l;
+
+                if (new Set([a, b, c, d]).size > 3) {
+                    if (c > b) {
+                        if (d < b) {
+                            tly += 1;
+                        }
+                    }
+                    if (c < b) {
+                        if (d > b) {
+                            tly += 1;
+                        }
+                    }
+                }
+            }
+            if (tly > bst) {
+                output += `s: ${s}, e: ${e}, tly: ${tly}\n`;
+                bst = Math.max(tly, bst);
+            }
+        }
+    }
+    output += 'bst: ' + bst + '\n';
+    document.getElementById('output').textContent = output;
+}
+</script>
+</body>
+</html>
