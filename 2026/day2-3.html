@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topological Sort Permutation Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Optimized Permutation Solver (Topological Sort)</h2>
+    <p>Paste the content of your data file below:</p>
+    <textarea id="inputData" placeholder="e.g., A>B B<C"></textarea>
+    <button onclick="calculateTally()">Calculate Tally</button>
+
+    <div id="result">Total Tally: 0</div>
+
+    <script>
+        function calculateTally() {
+            const input = document.getElementById('inputData').value.trim();
+            if (!input) {
+                document.getElementById('result').innerText = "Total Tally: 0";
+                return;
+            }
+
+            const lines = input.split('\n');
+            let globalNs = new Set();
+
+            // Step 1: Discover all unique global nodes
+            lines.forEach(ln => {
+                const tokens = ln.split(/\s+/).filter(t => t.length > 0);
+                tokens.forEach(tok => {
+                    if (tok.includes('>') || tok.includes('<')) {
+                        globalNs.add(tok[0]);
+                        globalNs.add(tok[2]);
+                    }
+                });
+            });
+
+            const allNodes = Array.from(globalNs);
+            let totalTally = 0;
+
+            // Step 2: Process each line independently
+            lines.forEach(ln => {
+                const tokens = ln.split(/\s+/).filter(t => t.length > 0);
+                if (tokens.length === 0) return;
+
+                // Build adjacency list graph and in-degree map for this specific line
+                let adj = {};
+                let inDegree = {};
+                
+                allNodes.forEach(node => {
+                    adj[node] = [];
+                    inDegree[node] = 0;
+                });
+
+                tokens.forEach(tok => {
+                    const u = tok[0];
+                    const op = tok[1];
+                    const v = tok[2];
+
+                    if (op === '>') {
+                        // u must come before v (u -> v)
+                        adj[u].push(v);
+                        inDegree[v]++;
+                    } else if (op === '<') {
+                        // v must come before u (v -> u)
+                        adj[v].push(u);
+                        inDegree[u]++;
+                    }
+                });
+
+                // Backtracking function to find all valid topological orderings
+                let currentPath = [];
+                
+                function findAllTopologicalSorts() {
+                    let flag = false;
+
+                    for (let i = 0; i < allNodes.length; i++) {
+                        const node = allNodes[i];
+
+                        // If inDegree is 0 and it's not yet picked in the current path
+                        if (inDegree[node] === 0 && !currentPath.includes(node)) {
+                            
+                            // Reduce in-degree of its adjacent neighbors
+                            adj[node].forEach(neighbor => {
+                                inDegree[neighbor]--;
+                            });
+
+                            // Include node in the current tracking path
+                            currentPath.push(node);
+                            
+                            // Recurse
+                            findAllTopologicalSorts();
+
+                            // Backtrack: Undo choices
+                            currentPath.pop();
+                            adj[node].forEach(neighbor => {
+                                inDegree[neighbor]++;
+                            });
+
+                            flag = true;
+                        }
+                    }
+
+                    // If all nodes are successfully placed in the path, we found a valid permutation
+                    if (!flag && currentPath.length === allNodes.length) {
+                        const combinedString = currentPath.join('');
+                        totalTally += parseInt(combinedString, 10);
+                    }
+                }
+
+                // Trigger the sorting for the line
+                findAllTopologicalSorts();
+            });
+
+            document.getElementById('result').innerText = `Total Tally: ${totalTally}`;
+        }
+    </script>
+</body>
+</html>
